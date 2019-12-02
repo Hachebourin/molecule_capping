@@ -1,0 +1,11 @@
+---
+
+- name: "Lancement de molecule_capping"
+  command: >-
+    {{ molecule_capping_java_home }}/bin/java {{ molecule_capping_Xmx }} -classpath
+    {{ molecule_capping_working_dir }}/{{ _molecule_capping_jarname }}::{{ molecule_capping_working_dir }}/{{ molecule_capping_jdbc_name }}
+    org.molecule_capping.launch.commandline.CommandLine updateDatabase -config "{{ molecule_capping_working_dir }}/molecule_capping-{{ item.name }}.properties"
+  with_items: "{{ molecule_capping_properties }}"
+  no_log: "{{ molecule_capping_no_log }}"
+  register: _molecule_capping_result_cmd
+  changed_when: '"INFO: Everything is up to date" not in _molecule_capping_result_cmd.stdout'

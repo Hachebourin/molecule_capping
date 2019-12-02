@@ -1,0 +1,9 @@
+---
+- name: "Verification des parametres du role"
+  import_tasks: assert.yml
+
+- name: "Prerequis a molecule_capping"
+  import_tasks: prepare.yml
+
+- name: "Lancement de molecule_capping"
+  import_tasks: run.yml

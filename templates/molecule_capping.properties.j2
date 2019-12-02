@@ -1,0 +1,10 @@
+database.userName={{ item.username }}
+database.password={{ item.password }}
+{% if item.name == "name1" %}
+molecule_capping.cast=true
+{% endif %}
+{% if item.name == "name1" or item.name == "name2" %}
+molecule_capping.run=java
+{% endif %}
+molecule_capping.locations={{ molecule_capping_path_install_bdd }}/{{ item.name }}
+

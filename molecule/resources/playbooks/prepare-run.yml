@@ -1,0 +1,47 @@
+---
+- name: "Preparation"
+  hosts: all
+  vars_files:
+    - ../vars/stuff.yml
+  become: true
+  tasks:
+    - name: "Retrieve OS facts"
+      setup:
+        gather_subset:
+          - '!all'
+          - '!any'
+          - ohai
+
+    - name: "Add repo {{ ansible_distribution_major_version }} test"
+      yum_repository:
+        name: Repo-test
+        description: "Repo test"
+        baseurl: "{{ repo_url }}/rhel/{{ ansible_distribution_major_version }}Server/x86_64/{{ ansible_distribution_version[:3] }}/test"
+        enabled: 0
+        gpgcheck: 0
+
+    - name: "Creation de l'arborescence du bouchon"
+      file:
+        dest: /tmp/cap_java
+        state: directory
+
+    - name: "Copie du java du pauvre"
+      copy:
+        src: "../capping/cap_java/cap_java.py"
+        dest: /tmp/cap_java
+        mode: 601
+
+    - name: "Creation du lien symbolique vers le java du pauvre"
+      file:
+        src: "/tmp/cap_java/cap_java.py"
+        dest: "/usr/bin/java"
+        state: link
+
+    - name: "Creation utilisateur molecule_capping"
+      group:
+        name: "{{ molecule_capping_group }}"
+        state: present
+
+    - name: "Creation groupe molecule_capping"
+      user:
+        name: "{{ molecule_capping_user }}"

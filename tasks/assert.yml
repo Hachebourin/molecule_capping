@@ -1,0 +1,19 @@
+---
+- name: "Validation des variables"
+  assert:
+    that:
+      - molecule_capping_user | length > 0
+      - molecule_capping_group | length > 0
+      - molecule_capping_repo_url | length > 0
+      - molecule_capping_properties | length > 0
+    msg: 'Une ou plusieurs variables sont vides'
+
+- name: "Verification de la presence de java"
+  stat:
+    path: "{{ molecule_capping_java_home }}/bin/java"
+  register: _molecule_capping_java_file
+
+- name: "Verification de la presence de java"
+  assert:
+    that: _molecule_capping_java_file.stat.exists
+    msg: 'Java est introuvable'

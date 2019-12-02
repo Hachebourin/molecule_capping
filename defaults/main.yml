@@ -1,0 +1,17 @@
+---
+molecule_capping_Xmx: "-Xmx512m"
+molecule_capping_working_dir: "/tmp/molecule_capping"
+molecule_capping_path_install_bdd: "/tmp/molecule_capping/bdd/create"
+
+molecule_capping_user: ""
+molecule_capping_group: ""
+
+molecule_capping_properties:
+  - name: ""
+    username: ""
+    password: ""
+
+molecule_capping_java_home: "/usr/"
+molecule_capping_no_log: false
+
+molecule_capping_jdbc: ""

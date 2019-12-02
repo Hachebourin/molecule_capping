@@ -1,0 +1,18 @@
+---
+
+- name: "Creation du repertoire de travail"
+  file:
+    path: "{{ molecule_capping_working_dir }}"
+    state: directory
+    owner: "{{ molecule_capping_user }}"
+    group: "{{ molecule_capping_group }}"
+    mode: 0750
+
+- name: "Mise en place du fichier molecule_capping.properties"
+  template:
+    src: "molecule_capping.properties.j2"
+    dest: "{{ molecule_capping_working_dir }}/molecule_capping-{{ item.name }}.properties"
+    owner: "{{ molecule_capping_user }}"
+    group: "{{ molecule_capping_group }}"
+    mode: 0440
+  with_items: "{{ molecule_capping_properties }}"

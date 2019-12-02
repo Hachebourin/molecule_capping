@@ -1,0 +1,25 @@
+---
+repo_url: "https://test-molecule_capping"
+
+molecule_capping_Xmx: "-Xmx512m"
+molecule_capping_working_dir: "/tmp/molecule_capping"
+molecule_capping_path_install_bdd: "/tmp/molecule_capping"
+
+molecule_capping_user: "molecule_capping"
+molecule_capping_group: "molecule_capping"
+
+molecule_capping_properties:
+  - name: "name1"
+    username: "oracle_username"
+    password: "oracle_pwd"
+  - name: "name2"
+    username: "oracle_username"
+    password: "oracle_pwd"
+  - name: "name3"
+    username: "oracle_username"
+    password: "oracle_pwd"
+
+molecule_capping_repo_url: "{{ repo_url }}/molecule_capping"
+molecule_capping_java_home: "/usr/"
+
+molecule_capping_jdbc_name: "ojdbc.jar"
